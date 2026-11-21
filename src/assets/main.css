@@ -23,6 +23,11 @@
   --animate-orbit: orbit 26s linear infinite;
   --animate-marquee: marquee 30s linear infinite;
 
+  /* maps */
+--color-night: #0f2419;
+--color-paper: #f6f1e4;
+--font-hand: 'Caveat', cursive;
+
   @keyframes orbit {
     to {
       transform: rotate(360deg);
