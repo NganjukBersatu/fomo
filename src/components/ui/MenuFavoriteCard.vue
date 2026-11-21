@@ -16,7 +16,15 @@ withDefaults(
     class="rounded-[32px] border-2 px-3.5 pt-3.5 pb-7 transition-[translate,rotate] hover:-translate-y-2 hover:-rotate-[.6deg]"
     :class="featured ? 'border-brand bg-brand text-soft' : 'border-line bg-mint'"
   >
-    <ImagePlaceholder class="mb-[22px] h-60">{{ menu.photoLabel }}</ImagePlaceholder>
+    <img
+  v-if="menu.photo"
+  :src="menu.photo"
+  :alt="menu.name"
+  loading="lazy"
+  class="mb-[22px] aspect-square w-full rounded-[22px] object-cover"
+/>
+<ImagePlaceholder v-else class="mb-[22px] aspect-square">{{ menu.photoLabel }}</ImagePlaceholder>
+
     <p
       class="mx-3.5 text-[13px] font-bold tracking-[.1em] uppercase"
       :class="featured ? 'text-line' : 'text-brand'"

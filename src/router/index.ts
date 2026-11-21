@@ -11,6 +11,12 @@ const router = createRouter({
       meta: { title: 'FOMO Cafe | Feed the panic' },
     },
     {
+      path: '/menu',
+      name: 'menu',
+      component: () => import('@/views/MenuView.vue'),
+      meta: { title: 'Menu lengkap | FOMO Cafe' },
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'not-found',
       component: () => import('@/views/NotFoundView.vue'),

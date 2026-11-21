@@ -1,7 +1,8 @@
 import type { Perk } from '@/types'
+import { Users, Wifi, Coffee } from 'lucide-vue-next'
 
 export const perks: Perk[] = [
-  { number: '01', title: '[Keunggulan 1]', description: '[Penjelasan singkat]' },
-  { number: '02', title: '[Keunggulan 2]', description: '[Penjelasan singkat]' },
-  { number: '03', title: '[Keunggulan 3]', description: '[Penjelasan singkat]' },
+  { icon: Users, title: 'Tempat Kumpul', description: 'Luas dan nyaman buat nongkrong rame-rame.' },
+  { icon: Wifi, title: 'Ngobrol Betah', description: 'Wi-Fi kencang, colokan banyak.' },
+  { icon: Coffee, title: 'Rasa Juara', description: 'Menu segar, harga bersahabat.' },
 ]

@@ -4,6 +4,8 @@ import BaseContainer from '@/components/ui/BaseContainer.vue'
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder.vue'
 import logoUrl from '@/assets/logo.png'
 import { site } from '@/data/site'
+import hero1Url from '@/assets/hero1.png'
+import hero2Url from '@/assets/hero2.png'
 </script>
 
 <template>
@@ -60,16 +62,16 @@ import { site } from '@/data/site'
           <img :src="logoUrl" width="150" height="150" alt="" class="w-[56%] rounded-full" />
         </div>
 
-        <ImagePlaceholder
-          class="absolute top-0 right-0 h-[190px] w-[140px] rotate-5 desk:h-[min(290px,40svh)] desk:w-[min(220px,30svh)]"
-        >
-          [FOTO SUASANA CAFE]
-        </ImagePlaceholder>
-        <ImagePlaceholder
-          class="absolute right-5 bottom-0 h-[160px] w-[130px] -rotate-6 desk:right-[60px] desk:h-[min(250px,34svh)] desk:w-[min(210px,28svh)]"
-        >
-          [FOTO PRODUK ANDALAN]
-        </ImagePlaceholder>
+        <img
+  :src="hero1Url"
+  alt="Suasana FOMO Cafe"
+  class="absolute top-0 right-0 h-[190px] w-[140px] rotate-5 rounded-[26px] object-cover shadow-[0_20px_50px_rgba(27,58,44,.35)] desk:h-[min(290px,40svh)] desk:w-[min(220px,30svh)]"
+/>
+<img
+  :src="hero2Url"
+  alt="Produk andalan FOMO Cafe"
+  class="absolute right-5 bottom-0 h-[160px] w-[130px] -rotate-6 rounded-[26px] object-cover shadow-[0_20px_50px_rgba(27,58,44,.35)] desk:right-[60px] desk:h-[min(250px,34svh)] desk:w-[min(210px,28svh)]"
+/>
       </div>
     </BaseContainer>
   </section>
