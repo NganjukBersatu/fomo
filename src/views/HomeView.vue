@@ -6,7 +6,6 @@ import AboutSection from '@/components/sections/AboutSection.vue'
 import MenuSection from '@/components/sections/MenuSection.vue'
 import TestimonialSection from '@/components/sections/TestimonialSection.vue'
 import GallerySection from '@/components/sections/GallerySection.vue'
-import OrderSection from '@/components/sections/OrderSection.vue'
 import VisitSection from '@/components/sections/VisitSection.vue'
 
 let observer: IntersectionObserver | null = null
@@ -46,6 +45,5 @@ onBeforeUnmount(() => {
   <MenuSection />
   <TestimonialSection />
   <GallerySection />
-  <OrderSection />
   <VisitSection />
 </template>

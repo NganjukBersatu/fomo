@@ -1,21 +1,20 @@
-<script setup lang="ts">
-import BaseContainer from '@/components/ui/BaseContainer.vue'
-</script>
-
 <template>
-  <section class="pt-[150px] pb-[100px]">
-    <BaseContainer>
-      <p
+  <section class="pt-[clamp(96px,10vw,120px)] pb-[clamp(40px,5vw,64px)]">
+    <div class="mx-auto w-full max-w-[1200px] px-6">
+      <h1
         data-reveal
-        class="max-w-[1000px] font-display text-[clamp(32px,5.6vw,72px)] leading-[1.04] font-extrabold tracking-[-.04em] text-ink"
+        class="max-w-[20ch] font-display text-[clamp(36px,6vw,76px)] leading-[1.08] font-extrabold tracking-[-.03em] text-ink text-balance"
       >
         Dibuat
-        <mark class="bg-transparent bg-[linear-gradient(transparent_58%,var(--color-lime)_58%)] text-inherit">
+        <mark
+          class="bg-transparent text-inherit [background-image:linear-gradient(transparent_62%,var(--color-lime)_62%)] [box-decoration-break:clone] [-webkit-box-decoration-break:clone] px-[.1em]"
+        >
           hanya karena FOMO.
         </mark>
-        Buat kamu yang takut ketinggalan kumpul, <em class="text-brand">ketinggalan cerita</em>, dan
-        ketinggalan rasa.
-      </p>
-    </BaseContainer>
+        Biar nggak
+        <em class="font-serif font-normal italic text-brand">ketinggalan</em>
+        kumpul, cerita, dan rasa.
+      </h1>
+    </div>
   </section>
 </template>

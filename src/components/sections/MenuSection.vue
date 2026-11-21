@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import BaseButton from '@/components/ui/BaseButton.vue'
+import { RouterLink } from 'vue-router'
 import BaseContainer from '@/components/ui/BaseContainer.vue'
 import MenuFavoriteCard from '@/components/ui/MenuFavoriteCard.vue'
-import MenuTabs from '@/components/ui/MenuTabs.vue'
 import SectionKicker from '@/components/ui/SectionKicker.vue'
-import { favoriteMenus, menuCategories } from '@/data/menu'
-import { site } from '@/data/site'
-import type { MenuCategoryId } from '@/types'
-
-const activeCategory = ref<MenuCategoryId>('minuman')
+import { favoriteMenus } from '@/data/menu'
 </script>
 
 <template>
@@ -35,42 +29,13 @@ const activeCategory = ref<MenuCategoryId>('minuman')
         />
       </div>
 
-      <div data-reveal class="mt-24 grid gap-14 desk:grid-cols-[.8fr_1.2fr]">
-        <div>
-          <SectionKicker>Menu lengkap</SectionKicker>
-          <h2 class="mb-8 text-[clamp(34px,4.6vw,56px)]">Pilih <em>kategori</em></h2>
-          <MenuTabs v-model="activeCategory" :categories="menuCategories" />
-        </div>
-
-        <div>
-          <ul
-            v-for="category in menuCategories"
-            v-show="activeCategory === category.id"
-            :id="`panel-${category.id}`"
-            :key="category.id"
-            role="tabpanel"
-            :aria-labelledby="`tab-${category.id}`"
-          >
-            <li
-              v-for="item in category.items"
-              :key="item.name"
-              class="flex items-baseline gap-3 border-b-2 border-line py-5"
-            >
-              <span class="font-display text-2xl font-extrabold text-ink">
-                {{ item.name }}
-                <small class="block font-sans text-[15px] font-normal text-copy">
-                  {{ item.description }}
-                </small>
-              </span>
-              <i class="-translate-y-[5px] flex-1 border-b-[3px] border-dotted border-lime"></i>
-              <b class="text-lg text-brand">{{ item.price }}</b>
-            </li>
-          </ul>
-
-          <BaseButton class="mt-7" :href="site.instagramUrl">
-            Lihat menu terbaru di Instagram
-          </BaseButton>
-        </div>
+      <div data-reveal class="mt-14 flex justify-center">
+        <RouterLink
+          to="/menu"
+          class="inline-flex items-center rounded-full bg-brand px-7 py-4 font-bold text-white transition-[translate,background-color] hover:-translate-y-1 hover:bg-ink"
+        >
+          Lihat menu lengkap
+        </RouterLink>
       </div>
     </BaseContainer>
   </section>

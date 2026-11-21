@@ -1,3 +1,5 @@
+import type { Component } from 'vue'
+
 export interface SiteInfo {
   name: string
   tagline: string
@@ -20,7 +22,7 @@ export interface NavLink {
 }
 
 export interface Perk {
-  number: string
+  icon: Component
   title: string
   description: string
 }
@@ -33,15 +35,23 @@ export interface MenuItem {
 
 export interface FavoriteMenu extends MenuItem {
   photoLabel: string
+  photo?: string
   badge: string
 }
 
 export type MenuCategoryId = 'minuman' | 'makanan' | 'camilan'
 
+export interface MenuGroup {
+  title: string
+  note?: string
+  highlight?: boolean
+  items: MenuItem[]
+}
+
 export interface MenuCategory {
   id: MenuCategoryId
   label: string
-  items: MenuItem[]
+  groups: MenuGroup[]
 }
 
 export interface Testimonial {
