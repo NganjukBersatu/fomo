@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* Hijau utama (dari latar mint sampai hijau hutan gelap) */
+  --color-primary-50:  #effff1;  /* latar halaman */
+  --color-primary-100: #dcfae0;  /* chip / tombol lembut */
+  --color-primary-200: #bff3c6;  /* border chip */
+  --color-primary-300: #93e8a0;
+  --color-primary-400: #6bdc7f;  /* highlight / badge versi */
+  --color-primary-500: #3fbf6a;
+  --color-primary-600: #3a8f62;
+  --color-primary-700: #2f6b50;  /* kartu hijau besar */
+  --color-primary-800: #265a42;  /* judul */
+  --color-primary-900: #1c4532;
+
+  /* Teks */
+  --color-ink: #234f3c;
+  --color-ink-soft: #4a6b5c;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-primary-50 font-sans text-ink antialiased;
+  }
+}
