@@ -18,7 +18,8 @@ export interface SiteInfo {
 
 export interface NavLink {
   label: string
-  hash: `#${string}`
+  hash?: `#${string}`
+  path?: string
 }
 
 export interface Perk {

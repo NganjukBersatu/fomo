@@ -27,11 +27,9 @@ export const site: SiteInfo = {
 
 export const navLinks: NavLink[] = [
   { label: 'Tentang', hash: '#tentang' },
-  { label: 'Menu', hash: '#menu' },
+  { label: 'Menu', path: '/menu' },
   { label: 'Kata teman', hash: '#teman' },
   { label: 'Kalcer', hash: '#kalcer' },
-  { label: 'Pesan antar', hash: '#pesan' },
-  { label: 'Karier', hash: '#tim' },
 ]
 
 export const deliveryApps: DeliveryApp[] = [

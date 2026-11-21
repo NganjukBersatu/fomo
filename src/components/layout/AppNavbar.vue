@@ -45,8 +45,8 @@ function closeMenu(): void {
       >
         <RouterLink
           v-for="link in navLinks"
-          :key="link.hash"
-          :to="{ path: '/', hash: link.hash }"
+          :key="link.label"
+          :to="link.path ?? { path: '/', hash: link.hash }"
           class="rounded-full px-[18px] py-3.5 text-[15px] font-semibold text-ink hover:bg-soft desk:px-3.5 desk:py-2.5"
         >
           {{ link.label }}
