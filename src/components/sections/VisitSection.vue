@@ -209,15 +209,6 @@ class="relative -mx-7 flex flex-col overflow-hidden bg-night desk:mx-0 desk:bloc
             Buka di Google Maps
           </a>
         </div>
-
-        <!-- stiker (desktop) -->
-        <div
-          class="pointer-events-none absolute top-10 right-10 hidden size-[130px] rotate-12 flex-col items-center justify-center rounded-full border-4 border-paper bg-brand text-paper desk:flex"
-          aria-hidden="true"
-        >
-          <span class="font-display text-[28px] font-extrabold">FOMO</span>
-          <span class="text-[11px] tracking-[.1em]">FEED THE PANIC</span>
-        </div>
       </div>
     </BaseContainer>
   </section>
