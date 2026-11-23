@@ -1,32 +1,32 @@
 import type { FavoriteMenu, MenuCategory } from '@/types'
-import favminuman from '@/assets/minuman.png'
-import favmakanan from '@/assets/makanan.png'
-import favcamilan from '@/assets/cemilan.png'
+import nasgorNaga from '@/assets/menu/makanan/buah-naga.jpg'
+import nasgorNanas from '@/assets/menu/makanan/nanas.png'
+import mangoLatte from '@/assets/menu/minuman/manggo.jpg'
 
 export const favoriteMenus: FavoriteMenu[] = [
   {
-    photoLabel: '[FOTO KOPI ORIGINAL FOMO]',
-    photo: favminuman,
-    badge: 'Andalan',
-    name: 'Kopi Fomo',
-    description: 'Es kopi khas kami, segar dan pas di lidah.',
-    price: 'Rp11.000',
-  },
-  {
-    photoLabel: '[FOTO SEBLAK FOMO]',
-    photo: favmakanan,
-    badge: 'Cuma ada di FOMO',
-    name: 'Rice Bowl Fomo',
-    description: 'Pedas, gurih, dan bikin pengin nambah.',
+    photoLabel: '[FOTO NASI GORENG BUAH NAGA]',
+    photo: nasgorNaga,
+    badge: 'Baru',
+    name: 'Nasi Goreng Buah Naga',
+    description: 'Nasi goreng warna merah muda dengan kerupuk, selada, dan bawang goreng.',
     price: 'Rp15.000',
   },
   {
-    photoLabel: '[FOTO CIRENG KUAH FOMO]',
-    photo: favcamilan,
-    badge: 'Andalan',
-    name: 'French Fries',
-    description: 'Renyah dan gurih, tersedia rasa original, ayam bawang, dan balado.',
-    price: 'Rp11.000',
+    photoLabel: '[FOTO MANGO LATTE]',
+    photo: mangoLatte,
+    badge: 'Baru',
+    name: 'Mango Latte',
+    description: 'Segar, creamy, dan manisnya pas, dengan potongan mangga dan es krim.',
+    price: 'Rp20.000',
+  },
+  {
+    photoLabel: '[FOTO NASI GORENG NANAS]',
+    photo: nasgorNanas,
+    badge: 'Baru',
+    name: 'Nasi Goreng Nanas',
+    description: 'Nasi goreng disajikan dalam buah nanas, lengkap dengan kerupuk dan selada.',
+    price: 'Rp20.000',
   },
 ]
 
@@ -38,6 +38,12 @@ export const menuCategories: MenuCategory[] = [
     id: 'minuman',
     label: 'Minuman',
     groups: [
+      {
+  title: 'Baru di FOMO',
+  note: 'Baru',
+  highlight: true,
+  items: [{ name: 'Mango Latte', description: 'Es krim & potongan mangga', price: '20K' }],
+},
       {
         title: 'Coffee',
         items: [
@@ -117,6 +123,15 @@ export const menuCategories: MenuCategory[] = [
     id: 'makanan',
     label: 'Makanan',
     groups: [
+      {
+  title: 'Baru di FOMO',
+  note: 'Baru',
+  highlight: true,
+  items: [
+    { name: 'Nasi Goreng Buah Naga', description: '', price: '15K' },
+    { name: 'Nasi Goreng Nanas', description: '', price: '20K' },
+  ],
+},
       {
         title: 'Cuma ada di FOMO',
         note: 'Andalan',
