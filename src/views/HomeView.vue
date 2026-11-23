@@ -3,6 +3,7 @@ import { onBeforeUnmount, onMounted } from 'vue'
 import HeroSection from '@/components/sections/HeroSection.vue'
 import StatementSection from '@/components/sections/StatementSection.vue'
 import AboutSection from '@/components/sections/AboutSection.vue'
+import EventSection from '@/components/sections/EventSection.vue'
 import MenuSection from '@/components/sections/MenuSection.vue'
 import TestimonialSection from '@/components/sections/TestimonialSection.vue'
 import GallerySection from '@/components/sections/GallerySection.vue'
@@ -42,6 +43,7 @@ onBeforeUnmount(() => {
   <HeroSection />
   <StatementSection />
   <AboutSection />
+  <EventSection />
   <MenuSection />
   <TestimonialSection />
   <GallerySection />
