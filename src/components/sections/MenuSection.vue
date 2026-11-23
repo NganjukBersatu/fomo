@@ -34,7 +34,7 @@ function goTo(i: number) {
     <BaseContainer>
       <div data-reveal class="mb-6 flex flex-wrap items-end justify-between gap-5 desk:mb-12">
         <div>
-          <SectionKicker>Menu andalan</SectionKicker>
+          <SectionKicker>Menu terbaru</SectionKicker>
           <h2>Yang bikin <em>balik lagi</em></h2>
         </div>
       </div>

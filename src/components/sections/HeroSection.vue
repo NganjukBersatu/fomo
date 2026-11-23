@@ -3,9 +3,9 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseContainer from '@/components/ui/BaseContainer.vue'
 import logoUrl from '@/assets/fomo.png'
 import heroBgUrl from '@/assets/hero2.png' // foto tempat / cafe (hanya tampil di mobile)
-import hero1Url from '@/assets/hero1.png'
 import hero2Url from '@/assets/hero2.png'
 import { site } from '@/data/site'
+import poster2 from '@/assets/poster2.jpeg'
 
 </script>
 
@@ -73,11 +73,11 @@ import { site } from '@/data/site'
 
       <!-- DESKTOP ONLY: kolase foto besar, logo jadi stiker di antara dua foto -->
       <div class="relative hidden desk:block desk:h-[min(560px,64svh)]">
-        <img
-          :src="hero1Url"
-          alt="Suasana FOMO Cafe"
-          class="absolute top-0 right-[2%] h-[78%] w-[52%] rotate-3 rounded-[28px] border-4 border-mint object-cover shadow-[0_24px_60px_rgba(10,30,20,.45)]"
-        />
+       <img
+  :src="poster2"
+  alt="Suasana FOMO Cafe"
+  class="absolute top-0 right-[2%] h-[78%] w-auto max-w-[60%] rotate-3 rounded-[28px] border-4 border-mint object-contain shadow-[0_24px_60px_rgba(10,30,20,.45)]"
+/>
         <img
           :src="hero2Url"
           alt="Produk andalan FOMO Cafe"
