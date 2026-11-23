@@ -1,77 +1,94 @@
 <script setup lang="ts">
 import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseContainer from '@/components/ui/BaseContainer.vue'
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder.vue'
-import logoUrl from '@/assets/logo.png'
-import { site } from '@/data/site'
+import logoUrl from '@/assets/fomo.png'
+import heroBgUrl from '@/assets/hero2.png' // foto tempat / cafe (hanya tampil di mobile)
 import hero1Url from '@/assets/hero1.png'
 import hero2Url from '@/assets/hero2.png'
+import { site } from '@/data/site'
+
 </script>
 
 <template>
-  <!-- Desktop: tinggi pas 1 layar (svh). Mobile: minimal 1 layar, boleh lebih kalau konten panjang. -->
+  <!-- Mobile: background foto tempat, tanpa pill. Desktop: kolase foto besar. -->
   <section
-    class="dark relative flex min-h-svh items-center overflow-hidden bg-brand pt-[104px] pb-10 text-white desk:h-svh desk:min-h-[640px]"
+    class="dark relative isolate flex min-h-svh flex-col justify-end overflow-hidden bg-ink pt-[104px] pb-44 text-white desk:h-svh desk:justify-center desk:bg-brand desk:pt-[100px] desk:pb-[10svh]"
   >
+    <!-- MOBILE ONLY: foto background + overlay -->
+    <img
+      :src="heroBgUrl"
+      alt="Suasana FOMO Cafe"
+      class="absolute inset-0 -z-20 size-full object-cover object-[center_30%] desk:hidden"
+      fetchpriority="high"
+    />
     <div
-      class="absolute -top-[240px] -right-[220px] size-[760px] rounded-full bg-ink"
+      class="absolute inset-0 -z-10 bg-linear-to-b from-[rgba(27,58,44,.15)] via-[rgba(27,58,44,.62)] to-[rgba(15,34,26,.96)] desk:hidden"
       aria-hidden="true"
     ></div>
 
-    <BaseContainer class="relative grid w-full items-center gap-6 desk:grid-cols-[1.15fr_.85fr] desk:gap-10">
+    <!-- DESKTOP ONLY: lingkaran gelap di belakang kolase -->
+    <div
+      class="absolute top-1/2 -right-[200px] hidden size-[820px] -translate-y-1/2 rounded-full bg-ink desk:block"
+      aria-hidden="true"
+    ></div>
+
+    <BaseContainer class="relative grid w-full items-center gap-6 desk:grid-cols-[1.05fr_.95fr] desk:gap-12">
       <div>
+        <!-- DESKTOP ONLY: tulisan di atas judul -->
         <p
-          class="mb-5 inline-block rounded-full border-2 border-line px-4 py-1.5 text-sm font-bold text-line"
+          class="mb-5 hidden rounded-full border-2 border-line px-4 py-1.5 text-sm font-bold text-line desk:inline-block"
         >
           {{ site.community }}
         </p>
+
         <h1
-          class="text-[clamp(56px,min(12vw,16svh),176px)] leading-[.86] tracking-[-.05em] text-white"
+          class="text-[clamp(68px,20vw,120px)] leading-[.88] tracking-[-.05em] text-white desk:text-[clamp(56px,min(10vw,15svh),168px)] desk:leading-[.86]"
         >
           <span class="block">Feed</span>
           <span class="block">the</span>
           <em class="text-[1.02em] text-lime italic">panic.</em>
         </h1>
-        <p class="mt-6 mb-7 max-w-[440px] text-[clamp(17px,2.6svh,21px)] text-soft">
+
+        <p class="mt-5 mb-6 max-w-[440px] text-[19px] leading-relaxed text-soft desk:mt-[3svh] desk:mb-[3.5svh] desk:max-w-[480px] desk:text-[clamp(18px,2.8svh,22px)] desk:leading-normal">
           {{ site.description }}
         </p>
-        <div class="flex flex-wrap gap-3">
-          <BaseButton href="#menu" variant="lime">Lihat menu</BaseButton>
-          <BaseButton href="#kunjungi" variant="ghost">Cari kami</BaseButton>
+
+        <div class="grid grid-cols-2 gap-3 desk:flex desk:flex-wrap">
+          <BaseButton
+            href="#menu"
+            variant="lime"
+            class="w-full justify-center text-center whitespace-nowrap max-desk:px-3! max-desk:py-3.5! max-desk:text-base! desk:w-auto"
+          >
+            Lihat menu
+          </BaseButton>
+          <BaseButton
+            href="#kunjungi"
+            variant="ghost"
+            class="w-full justify-center text-center whitespace-nowrap max-desk:px-3! max-desk:py-3.5! max-desk:text-base! desk:w-auto"
+          >
+            Cari kami
+          </BaseButton>
         </div>
       </div>
 
-      <div class="relative h-[320px] desk:h-[min(540px,64svh)]">
-        <div
-          class="absolute top-[40px] left-0 z-[2] grid size-[190px] place-items-center rounded-full bg-mint shadow-[0_20px_50px_rgba(27,58,44,.35)] desk:top-[16%] desk:size-[min(290px,38svh)]"
-        >
-          <svg
-            class="absolute inset-0 size-full animate-orbit motion-reduce:animate-none"
-            viewBox="0 0 200 200"
-            aria-hidden="true"
-          >
-            <defs>
-              <path id="badge-circle" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" />
-            </defs>
-            <text class="fill-brand text-[13px] font-extrabold tracking-[2px]">
-              <textPath href="#badge-circle" textLength="500" lengthAdjust="spacing">
-                {{ site.badgeText }}
-              </textPath>
-            </text>
-          </svg>
-          <img :src="logoUrl" width="150" height="150" alt="" class="w-[56%] rounded-full" />
-        </div>
+      <!-- DESKTOP ONLY: kolase foto besar, logo jadi stiker di antara dua foto -->
+      <div class="relative hidden desk:block desk:h-[min(560px,64svh)]">
+        <img
+          :src="hero1Url"
+          alt="Suasana FOMO Cafe"
+          class="absolute top-0 right-[2%] h-[78%] w-[52%] rotate-3 rounded-[28px] border-4 border-mint object-cover shadow-[0_24px_60px_rgba(10,30,20,.45)]"
+        />
+        <img
+          :src="hero2Url"
+          alt="Produk andalan FOMO Cafe"
+          class="absolute bottom-0 left-[4%] h-[52%] w-[50%] -rotate-4 rounded-[28px] border-4 border-mint object-cover shadow-[0_24px_60px_rgba(10,30,20,.45)]"
+        />
 
         <img
-  :src="hero1Url"
-  alt="Suasana FOMO Cafe"
-  class="absolute top-0 right-0 h-[190px] w-[140px] rotate-5 rounded-[26px] object-cover shadow-[0_20px_50px_rgba(27,58,44,.35)] desk:h-[min(290px,40svh)] desk:w-[min(220px,30svh)]"
-/>
-<img
-  :src="hero2Url"
-  alt="Produk andalan FOMO Cafe"
-  class="absolute right-5 bottom-0 h-[160px] w-[130px] -rotate-6 rounded-[26px] object-cover shadow-[0_20px_50px_rgba(27,58,44,.35)] desk:right-[60px] desk:h-[min(250px,34svh)] desk:w-[min(210px,28svh)]"
-/>
+          :src="logoUrl"
+          alt="Logo FOMO"
+          class="absolute top-[14%] left-[20%] z-[2] size-[min(190px,25svh)] animate-orbit rounded-full shadow-[0_20px_50px_rgba(10,30,20,.45)] motion-reduce:animate-none"
+        />
       </div>
     </BaseContainer>
   </section>

@@ -24,9 +24,9 @@ export const favoriteMenus: FavoriteMenu[] = [
     photoLabel: '[FOTO CIRENG KUAH FOMO]',
     photo: favcamilan,
     badge: 'Andalan',
-    name: 'Kentang Goreng Fomo',
+    name: 'French Fries',
     description: 'Renyah dan gurih, tersedia rasa original, ayam bawang, dan balado.',
-    price: 'Rp13.000',
+    price: 'Rp11.000',
   },
 ]
 

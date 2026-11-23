@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import BaseButton from '@/components/ui/BaseButton.vue'
 import BaseContainer from '@/components/ui/BaseContainer.vue'
 import SectionKicker from '@/components/ui/SectionKicker.vue'
 import { menuCategories } from '@/data/menu'
-import { site } from '@/data/site'
 import type { MenuCategoryId } from '@/types'
 import menuMinuman from '@/assets/minuman.png'
 import menuMakanan from '@/assets/makanan.png'
@@ -22,19 +20,24 @@ const activePhoto = computed(() => photos[activeCategory.value])
 </script>
 
 <template>
-  <main class="pt-[clamp(110px,12vw,140px)] pb-[84px] desk:pb-28">
+  <main class="pt-[clamp(104px,12vw,140px)] pb-16 desk:pb-28">
     <BaseContainer>
-      <header class="mb-8">
+      <header class="mb-6 desk:mb-8">
         <SectionKicker>Menu lengkap</SectionKicker>
         <h1
-          class="font-display text-[clamp(40px,6vw,72px)] leading-[1.05] font-extrabold tracking-[-.03em] text-ink"
+          class="font-display text-[clamp(38px,6vw,72px)] leading-[1.05] font-extrabold tracking-[-.03em] text-ink"
         >
           Semua menu
           <em class="font-serif font-normal italic text-brand">FOMO</em>
         </h1>
       </header>
 
-      <div role="tablist" aria-label="Kategori menu" class="mb-10 flex flex-wrap gap-2.5">
+      <!-- Kategori: mobile 3 kolom sama lebar (selalu 1 baris), desktop seperti semula -->
+      <div
+        role="tablist"
+        aria-label="Kategori menu"
+        class="mb-7 grid grid-flow-col auto-cols-fr gap-2 desk:mb-10 desk:flex desk:flex-wrap desk:gap-2.5"
+      >
         <button
           v-for="category in menuCategories"
           :id="`tab-${category.id}`"
@@ -43,7 +46,7 @@ const activePhoto = computed(() => photos[activeCategory.value])
           role="tab"
           :aria-selected="activeCategory === category.id"
           :aria-controls="`panel-${category.id}`"
-          class="rounded-full border-2 px-5 py-2 font-display text-[15px] font-extrabold transition-[background-color,color,translate] hover:-translate-y-0.5"
+          class="rounded-full border-2 px-2 py-2.5 text-center font-display text-sm font-extrabold transition-[background-color,color,translate] hover:-translate-y-0.5 desk:px-5 desk:py-2 desk:text-[15px]"
           :class="
             activeCategory === category.id
               ? 'border-brand bg-brand text-white'
@@ -55,7 +58,8 @@ const activePhoto = computed(() => photos[activeCategory.value])
         </button>
       </div>
 
-      <div class="grid items-start gap-10 desk:grid-cols-[.8fr_1.2fr] desk:gap-16">
+      <div class="grid items-start gap-8 desk:grid-cols-[.8fr_1.2fr] desk:gap-16">
+        <!-- Foto menu: di atas daftar harga (mobile), di kiri (desktop) -->
         <a
           :href="activePhoto.src"
           target="_blank"
@@ -68,7 +72,7 @@ const activePhoto = computed(() => photos[activeCategory.value])
             :src="activePhoto.src"
             :alt="activePhoto.alt"
             loading="lazy"
-            class="h-auto w-full rounded-[28px] border-2 border-line shadow-[0_12px_40px_-12px_rgba(0,0,0,.25)] transition-transform hover:-translate-y-1"
+            class="h-auto w-full rounded-[24px] border-2 border-line shadow-[0_12px_40px_-12px_rgba(0,0,0,.25)] transition-transform hover:-translate-y-1 desk:rounded-[28px]"
           />
         </a>
 
@@ -80,18 +84,24 @@ const activePhoto = computed(() => photos[activeCategory.value])
             :key="category.id"
             role="tabpanel"
             :aria-labelledby="`tab-${category.id}`"
-            class="space-y-8"
+            class="space-y-6 desk:space-y-8"
           >
             <section
               v-for="group in category.groups"
               :key="group.title"
-              :class="group.highlight ? 'rounded-[28px] border-2 border-line bg-soft px-6 py-5' : ''"
+              :class="
+                group.highlight
+                  ? 'rounded-[22px] border-2 border-line bg-soft px-4 py-4 desk:rounded-[28px] desk:px-6 desk:py-5'
+                  : ''
+              "
             >
-              <div class="mb-2 flex items-center gap-3">
-                <h2 class="font-display text-xl font-extrabold text-ink">{{ group.title }}</h2>
+              <div class="mb-1 flex items-center gap-3 desk:mb-2">
+                <h2 class="font-display text-lg font-extrabold text-ink desk:text-xl">
+                  {{ group.title }}
+                </h2>
                 <span
                   v-if="group.note"
-                  class="rounded-full bg-lime px-3 py-0.5 text-xs font-bold text-deep"
+                  class="shrink-0 rounded-full bg-lime px-2.5 py-0.5 text-xs font-bold text-deep"
                 >
                   {{ group.note }}
                 </span>
@@ -102,16 +112,18 @@ const activePhoto = computed(() => photos[activeCategory.value])
                 <li
                   v-for="item in group.items"
                   :key="item.name"
-                  class="flex items-baseline gap-3 border-b border-line py-3 last:border-b-0"
+                  class="flex items-baseline gap-2.5 border-b border-line py-2.5 last:border-b-0 desk:gap-3 desk:py-3"
                 >
-                  <span class="text-[17px] font-semibold text-ink">
+                  <span class="min-w-0 text-base font-semibold text-ink desk:text-[17px]">
                     {{ item.name }}
-                    <small v-if="item.description" class="block text-sm font-normal text-copy">
+                    <small v-if="item.description" class="block text-[13px] font-normal text-copy desk:text-sm">
                       {{ item.description }}
                     </small>
                   </span>
                   <i class="-translate-y-[4px] flex-1 border-b-[3px] border-dotted border-lime"></i>
-                  <b class="text-base text-brand">{{ item.price }}</b>
+                  <b class="shrink-0 text-[15px] whitespace-nowrap text-brand desk:text-base">
+                    {{ item.price }}
+                  </b>
                 </li>
               </ul>
             </section>
