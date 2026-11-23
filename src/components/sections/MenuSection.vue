@@ -27,10 +27,10 @@ function goTo(i: number) {
 </script>
 
 <template>
-  <section
-    id="menu"
-    class="rounded-[36px] bg-white pt-14 pb-24 shadow-[0_-1px_0_var(--color-line)] desk:rounded-[56px] desk:pt-28 desk:pb-28"
-  >
+ <section
+  id="menu"
+  class="relative z-10 -mt-9 rounded-[36px] bg-white pt-14 pb-24 shadow-[0_-1px_0_var(--color-line)] desk:-mt-14 desk:rounded-[56px] desk:pt-28 desk:pb-28"
+>
     <BaseContainer>
       <div data-reveal class="mb-6 flex flex-wrap items-end justify-between gap-5 desk:mb-12">
         <div>
