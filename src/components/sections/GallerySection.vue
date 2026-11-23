@@ -7,7 +7,7 @@ import { galleryPhotos, site } from '@/data/site'
 // kemiringan kecil bergantian supaya terasa "ditempel", tapi tetap rapi
 const tilts = ['-rotate-1', 'rotate-1', 'rotate-[0.5deg]', '-rotate-[0.5deg]']
 
-// stiker bubble, menempel di sudut jendela tertentu (index mulai dari 0)
+// stiker bubble DESKTOP, menempel di sudut jendela tertentu (index mulai dari 0)
 const stickers: Record<number, { text: string; class: string }> = {
   1: {
     text: "this week's recap",
@@ -23,9 +23,27 @@ const stickers: Record<number, { text: string; class: string }> = {
   },
 }
 
-// di HP (2 kolom) foto terakhir sendirian: taruh di tengah
-const isLonely = (index: number) =>
-  galleryPhotos.length % 2 === 1 && index === galleryPhotos.length - 1
+// stiker bubble MOBILE, hanya di foto lebar (index 0, 3, 6)
+const stickersMobile: Record<number, { text: string; class: string }> = {
+  0: {
+    text: "this week's recap",
+    class: '-right-2 -top-3.5 -rotate-3 bg-[#285944] text-white rounded-bl-[4px]',
+  },
+  3: {
+    text: 'love the vibes!',
+    class: '-bottom-3.5 -left-2 rotate-2 border-2 border-[#285944] bg-white text-[#285944] rounded-br-[4px]',
+  },
+  6: {
+    text: 'open 24 hours',
+    class: '-bottom-3.5 -right-2 -rotate-2 bg-[#9fd9a8] text-[#1d4433] rounded-bl-[4px]',
+  },
+}
+
+// mobile (2 kolom): ritme "1 foto lebar, lalu 2 foto berpasangan" (index 0, 3, 6, ...)
+// kalau jumlah foto bikin foto terakhir sendirian, foto itu ikut jadi lebar
+const isWide = (index: number) =>
+  index % 3 === 0 ||
+  (index === galleryPhotos.length - 1 && index % 3 === 1)
 </script>
 
 <template>
@@ -41,7 +59,7 @@ const isLonely = (index: number) =>
 
       <div
         data-reveal
-        class="mt-10 grid grid-cols-2 gap-x-3 gap-y-6 desk:mt-14 desk:grid-cols-3 desk:gap-x-6 desk:gap-y-10"
+        class="mt-10 grid grid-cols-2 items-start gap-x-3 gap-y-6 desk:mt-14 desk:grid-cols-3 desk:gap-x-6 desk:gap-y-10"
       >
         <figure
           v-for="(photo, index) in galleryPhotos"
@@ -49,8 +67,7 @@ const isLonely = (index: number) =>
           class="relative m-0 flex flex-col rounded-[14px] bg-white shadow-[0_10px_28px_rgba(40,89,68,0.18)] transition duration-300 hover:z-10 hover:rotate-0 hover:scale-[1.02] motion-reduce:transition-none"
           :class="[
             tilts[index % tilts.length],
-            isLonely(index) &&
-              'col-span-2 mx-auto w-[calc(50%-0.375rem)] desk:col-span-1 desk:mx-0 desk:w-auto',
+            isWide(index) && 'col-span-2 desk:col-span-1',
           ]"
         >
           <!-- bilah judul jendela -->
@@ -63,8 +80,11 @@ const isLonely = (index: number) =>
             </span>
           </div>
 
-          <!-- area foto 4:5 (portrait). Ganti aspect-[4/5] kalau fotomu beda rasio -->
-          <div class="relative m-2 mt-0 aspect-[4/5] overflow-hidden rounded-lg">
+          <!-- area foto: di HP foto lebar pakai 16:10, selain itu 4:5 (portrait) -->
+          <div
+            class="relative m-2 mt-0 overflow-hidden rounded-lg"
+            :class="isWide(index) ? 'aspect-[16/10] desk:aspect-[4/5]' : 'aspect-[4/5]'"
+          >
             <img
               :src="photo.src"
               :alt="photo.alt"
@@ -74,7 +94,17 @@ const isLonely = (index: number) =>
             />
           </div>
 
-          <!-- stiker, hanya di desktop -->
+          <!-- stiker mobile: hanya di foto lebar -->
+          <span
+            v-if="stickersMobile[index]"
+            aria-hidden="true"
+            class="pointer-events-none absolute z-[3] whitespace-nowrap rounded-[18px] px-3 py-1.5 text-xs font-semibold desk:hidden"
+            :class="stickersMobile[index].class"
+          >
+            {{ stickersMobile[index].text }}
+          </span>
+
+          <!-- stiker desktop -->
           <span
             v-if="stickers[index]"
             aria-hidden="true"

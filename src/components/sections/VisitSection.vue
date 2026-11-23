@@ -17,6 +17,7 @@ const select = (id: string): void => {
   activeId.value = id
 }
 const formatRating = (n: number): string => n.toFixed(1).replace('.', ',')
+const shortName = (name: string): string => name.replace(/^FOMO\s+/i, '')
 const toWaLink = (phone: string): string =>
   `https://wa.me/62${phone.replace(/\D/g, '').replace(/^0/, '')}`
 </script>
@@ -26,37 +27,118 @@ const toWaLink = (phone: string): string =>
     <BaseContainer>
       <div
         data-reveal
-        class="relative flex flex-col overflow-hidden rounded-[36px] border-4 border-paper bg-night desk:block desk:h-[720px]"
+class="relative -mx-7 flex flex-col overflow-hidden bg-night desk:mx-0 desk:block desk:h-[720px] desk:rounded-[36px] desk:border-4 desk:border-paper"
       >
-        <!-- peta -->
-        <div class="order-2 h-[380px] desk:absolute desk:inset-0 desk:h-auto">
-          <BranchMap :branches="branches" :active-id="activeId" @select="select" />
+        <!-- MOBILE: peta + judul menyatu (K2). DESKTOP: wrapper "menghilang" (contents) -->
+        <div class="relative h-[460px] desk:contents">
+          <!-- peta -->
+          <div class="absolute inset-0">
+            <BranchMap :branches="branches" :active-id="activeId" @select="select" />
+          </div>
+
+          <!-- fade judul -> peta (mobile) -->
+          <div
+  class="pointer-events-none absolute -inset-px bg-linear-to-b from-night via-night/85 via-35% to-transparent to-60% desk:hidden"
+  aria-hidden="true"
+></div>
+
+          <!-- fade peta -> halaman (mobile, bawah) -->
+<div
+  class="pointer-events-none absolute -inset-x-px -bottom-px h-24 bg-linear-to-t from-night to-transparent desk:hidden"
+  aria-hidden="true"
+></div>
+
+          <!-- fade kiri -> kanan (desktop, tetap) -->
+          <div
+            class="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-night/90 via-night/60 via-40% to-transparent to-65% desk:block"
+            aria-hidden="true"
+          ></div>
+
+          <!-- judul -->
+          <div
+            class="pointer-events-none relative p-6 pt-8 text-paper desk:absolute desk:top-10 desk:left-12 desk:w-[430px] desk:p-0"
+          >
+            <p class="inline-block -rotate-3 font-hand text-[28px] text-lime desk:text-[32px]">
+              feed the panic<span class="hidden desk:inline">, mampir yuk</span>
+            </p>
+            <h2 class="text-paper">
+              Mampir ke
+              <span class="font-hand text-[1.3em] font-bold tracking-normal text-white"
+                >F.o.m.o</span
+              >
+            </h2>
+            <p class="mt-3.5 hidden text-[15px] text-paper/80 desk:block">
+              Tiga tempat nongkrong, satu vibe. Pilih yang paling dekat dari kamu.
+            </p>
+          </div>
         </div>
 
-        <div
-          class="pointer-events-none absolute inset-0 hidden bg-linear-to-r from-night/90 via-night/60 via-40% to-transparent to-65% desk:block"
-          aria-hidden="true"
-        ></div>
+        <!-- MOBILE: tab cabang (K1) -->
+        <div class="flex gap-2 px-6 pt-5 desk:hidden" role="tablist" aria-label="Pilih cabang">
+          <button
+            v-for="b in branches"
+            :key="b.id"
+            type="button"
+            role="tab"
+            :aria-selected="b.id === activeId"
+            class="flex min-w-0 flex-1 flex-col gap-0.5 rounded-xl border px-2.5 py-2.5 text-left transition-colors"
+            :class="
+              b.id === activeId
+                ? 'border-transparent bg-lime text-deep'
+                : 'border-paper/25 bg-transparent text-paper'
+            "
+            @click="select(b.id)"
+          >
+            <span class="truncate text-[13px] font-extrabold">{{ shortName(b.name) }}</span>
+            <span class="flex items-center gap-1 text-xs font-bold">
+              <Star class="size-3" aria-hidden="true" />
+              {{ formatRating(b.rating) }}
+            </span>
+          </button>
+        </div>
 
-        <!-- judul -->
-        <div
-          class="order-1 p-6 text-paper desk:pointer-events-none desk:absolute desk:top-10 desk:left-12 desk:w-[430px] desk:p-0"
+        <!-- MOBILE: kartu detail cabang aktif (K1) -->
+        <article
+          class="mx-6 mt-4 -rotate-1 rounded-md bg-lime px-5 py-4 text-deep shadow-[0_6px_0_rgba(0,0,0,.35)] desk:hidden"
         >
-          <p class="inline-block -rotate-3 font-hand text-[32px] text-lime">
-            feed the panic, mampir yuk
-          </p>
-          <h2 class="text-paper">
-            Mampir ke
-            <span class="font-hand text-[1.3em] font-bold tracking-normal text-white">F.o.m.o</span>
-          </h2>
-          <p class="mt-3.5 text-[15px] text-paper/80">
-            Tiga tempat nongkrong, satu vibe. Pilih yang paling dekat dari kamu.
-          </p>
-        </div>
+          <div class="flex items-baseline justify-between gap-3">
+            <h3 class="font-display text-[17px] font-extrabold">{{ active.name }}</h3>
+            <span class="flex items-center gap-1 text-[13px] font-bold">
+              <Star class="size-3.5" aria-hidden="true" />
+              {{ formatRating(active.rating) }} ({{ active.reviewCount }})
+            </span>
+          </div>
+          <div class="mt-3 grid gap-1.5 text-sm font-semibold">
+            <p class="flex gap-2">
+              <MapPin class="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+              {{ active.address }}
+            </p>
+            <p class="flex gap-2">
+              <Clock class="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+              {{ active.openingHours }}
+            </p>
+            <p class="flex gap-2">
+              <MessageCircle class="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+              <span>
+                <template v-if="active.whatsapp">
+                  <a
+                    :href="toWaLink(active.whatsapp)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="underline"
+                    >{{ active.whatsapp }}</a
+                  >
+                  ·
+                </template>
+                <a :href="site.instagramUrl" class="underline">{{ site.instagramHandle }}</a>
+              </span>
+            </p>
+          </div>
+        </article>
 
-        <!-- kartu cabang -->
+        <!-- DESKTOP: kartu cabang (tidak berubah) -->
         <div
-          class="order-3 flex flex-col gap-3.5 p-6 desk:absolute desk:bottom-10 desk:left-12 desk:w-[430px] desk:p-0"
+          class="hidden flex-col gap-3.5 desk:absolute desk:bottom-10 desk:left-12 desk:flex desk:w-[430px]"
         >
           <article
             v-for="(b, i) in branches"
@@ -111,19 +193,19 @@ const toWaLink = (phone: string): string =>
         </div>
 
         <!-- tombol -->
-        <div class="order-4 px-6 pb-6 desk:absolute desk:right-10 desk:bottom-10 desk:p-0">
+        <div class="px-6 py-6 desk:absolute desk:right-10 desk:bottom-10 desk:p-0">
           <a
             :href="active.mapsUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3.5 text-[15px] font-extrabold text-deep shadow-[0_5px_0_rgba(0,0,0,.35)] transition-transform motion-safe:hover:-translate-y-0.5"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-paper px-6 py-3.5 text-[15px] font-extrabold text-deep shadow-[0_5px_0_rgba(0,0,0,.35)] transition-transform motion-safe:hover:-translate-y-0.5 desk:w-auto"
           >
             <MapPin class="size-[18px]" aria-hidden="true" />
             Buka di Google Maps
           </a>
         </div>
 
-        <!-- stiker -->
+        <!-- stiker (desktop) -->
         <div
           class="pointer-events-none absolute top-10 right-10 hidden size-[130px] rotate-12 flex-col items-center justify-center rounded-full border-4 border-paper bg-brand text-paper desk:flex"
           aria-hidden="true"
