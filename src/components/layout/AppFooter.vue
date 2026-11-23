@@ -10,7 +10,7 @@ const year: number = new Date().getFullYear()
 
 // Karier dan Pesan antar tidak dipakai di footer
 const HIDDEN_HASHES: readonly string[] = ['#tim', '#pesan']
-const footerLinks = navLinks.filter((link) => !HIDDEN_HASHES.includes(link.hash))
+const footerLinks = navLinks.filter((link) => !HIDDEN_HASHES.includes(link.hash ?? ''))
 
 // Kartu cabang miring bergantian seperti polaroid; di mobile miringnya dibuat tipis
 const cardTilt = [
@@ -45,9 +45,9 @@ const cardTilt = [
             <ul
               class="grid grid-cols-2 gap-x-4 border-y border-line/30 py-2 text-[15px] font-bold text-paper desk:gap-y-1.5 desk:border-0 desk:py-0"
             >
-              <li v-for="link in footerLinks" :key="link.hash">
+              <li v-for="link in footerLinks" :key="link.label">
                 <RouterLink
-                  :to="{ path: '/', hash: link.hash }"
+                  :to="link.path ?? { path: '/', hash: link.hash }"
                   class="inline-block py-2 hover:text-lime hover:underline desk:py-0"
                 >
                   {{ link.label }}
