@@ -11,6 +11,13 @@
   --color-lime: #6edc82;
   --color-deep: #1b3a2c;
 
+    /* Buat semua max-w-* container jadi full width */
+  --container-3xl: 100%;
+  --container-4xl: 100%;
+  --container-5xl: 100%;
+  --container-6xl: 100%;
+  --container-7xl: 100%;
+
   /* Font */
   --font-display: 'Bricolage Grotesque', sans-serif;
   --font-serif: 'Instrument Serif', Georgia, serif;
