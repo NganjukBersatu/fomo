@@ -30,7 +30,12 @@ const toWaLink = (phone: string): string =>
 class="relative -mx-7 flex flex-col overflow-hidden bg-night desk:mx-0 desk:block desk:h-[720px] desk:rounded-[36px] desk:border-4 desk:border-paper"
       >
         <!-- MOBILE: peta + judul menyatu (K2). DESKTOP: wrapper "menghilang" (contents) -->
-        <div class="relative h-[460px] desk:contents">
+        <div class="relative h-[460px] overflow-hidden desk:contents">
+
+<!-- penutup tepi atas & bawah (mobile) supaya tidak ada garis tipis -->
+<div class="pointer-events-none absolute inset-x-0 top-0 z-10 h-1 bg-night desk:hidden" aria-hidden="true"></div>
+<div class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-1 bg-night desk:hidden" aria-hidden="true"></div>
+
           <!-- peta -->
           <div class="absolute inset-0">
             <BranchMap :branches="branches" :active-id="activeId" @select="select" />
