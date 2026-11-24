@@ -280,12 +280,14 @@ onBeforeUnmount(() => window.removeEventListener('resize', onResize))
             Ceritakan idemu, kita bikin jadi kalcer bareng.
           </div>
         </div>
-        <a
-          href="#kunjungi"
-          class="w-full rounded-full bg-lime px-8 py-3.5 text-center text-base font-extrabold text-deep no-underline transition hover:brightness-95 desk:w-auto desk:px-[34px] desk:py-4"
-        >
-          Hubungi kami
-        </a>
+       <a
+  href="https://www.instagram.com/fomo.pusat/"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="w-full rounded-full bg-lime px-8 py-3.5 text-center text-base font-extrabold text-deep no-underline transition hover:brightness-95 desk:w-auto desk:px-[34px] desk:py-4"
+>
+  Hubungi kami
+</a>
       </div>
     </BaseContainer>
   </section>
